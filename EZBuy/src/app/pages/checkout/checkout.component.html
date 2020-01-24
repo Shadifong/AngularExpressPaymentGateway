@@ -48,29 +48,30 @@
           <table class='half-input-table'>
             <tr>
               <td>Payement Method: </td>
-              <select matNativeControl required #selectedDropdown   (change)="onSelect($event)">
+              <select matNativeControl required #selectedDropdown (change)="onSelect($event)">
                 <option value={{defaultPaymentMethod}}>{{defaultPaymentMethod}}</option>
                 <option value={{paymentMethod}} *ngFor='let paymentMethod of PaymentMethods'>{{paymentMethod}}</option>
               </select>
             </tr>
           </table>
           <img src='https://cdn.pixabay.com/photo/2015/05/26/09/37/paypal-784404_960_720.png' height='80'
-            class='credit-card-image' id='credit-card-image' *ngIf='select == 0 || !hide' />
+            class='credit-card-image' id='credit-card-image' *ngIf='select == paymentMethodEnum.Paypal || !hide' />
 
-            <div   *ngIf='select == 1'>
-             <h1 class='stripeTitle'>Stripe</h1>
-            </div>
-
-
-            <button class='pay-btn' (click)='pay(totalPrice)' *ngIf='select == 1'>Pay With Stripe</button>
-            <div>
-              <div  #paypal class='paypalDiv' [ngClass]='hide ? "hide" : ""'></div>
-            </div>
+          <div *ngIf='select == paymentMethodEnum.Stripe'>
+            <h1 class='stripeTitle'>Stripe</h1>
+          </div>
 
 
+          <button class='pay-btn' (click)='pay(totalPrice)' *ngIf='select == paymentMethodEnum.Stripe'>Pay
+            With Stripe</button>
+          <div>
+            <div #paypal class='paypalDiv' [ngClass]='hide ? "hide" : ""'></div>
+          </div>
 
+
+
+        </div>
       </div>
     </div>
-  </div>
 
-</div>
+  </div>
