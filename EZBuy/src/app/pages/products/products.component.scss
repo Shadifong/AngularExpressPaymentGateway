@@ -1,0 +1,52 @@
+.form-control {
+  box-shadow: 0 10px 40px 0 #B0C1D9;
+}
+
+.form-control::placeholder {
+  font-family: FontAwesome;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.container>.item {
+  flex: 1 1 1 1 1;
+}
+
+
+input {
+  font-size: 16px;
+  outline: none;
+  padding: 80px;
+  display: inline-block;
+  width: 26%;
+  border-radius: 8px;
+  padding: 16px 70px 8px 38px;
+  position: relative;
+  background: white;
+  border: 1px solid #ddd;
+}
+
+.shopping-cart {
+  display: inline-block;
+  background: url('http://cdn1.iconfinder.com/data/icons/jigsoar-icons/24/_cart.png') no-repeat 0 0;
+  width: 24px;
+  height: 24px;
+  margin: 0 10px 0 0;
+}
+
+.cartNumber {
+  position: absolute;
+  top: 0;
+  right: 0px;
+  font-weight: bold;
+  background: red;
+  color: white;
+  border-radius: 100%;
+  width: 15px;
+  height: 15px;
+}

@@ -1,0 +1,76 @@
+<div>
+  <h1 class="orderCartTitle">Order Cart</h1>
+  <div class='container'>
+    <div class='window'>
+      <div class='order-info'>
+        <div class='order-info-content'>
+          <h2>Order Summary</h2>
+          <div *ngIf='totalPrice == 0'>
+            <h3> There are no Items in your Cart, Please add some Items so you can make a purchase</h3>
+          </div>
+
+          <div *ngFor='let product of productsArray'>
+            <table class='order-table'>
+              <tbody>
+                <tr>
+                  <td><img src={{product.src}} class='full-width' />
+                  </td>
+                  <td>
+                    <br>
+                    <br>{{product.name}}<br> <span class='thin small'>{{product.description}}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class='price'> ${{product.price}}</div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class='line'></div>
+
+          </div>
+
+          <div class='total' *ngIf='totalPrice > 0'>
+            <span style='float:left;' class="total">
+
+              TOTAL
+            </span>
+            <span style='float:right; text-align:right;' class='total'>
+
+              ${{totalPrice}}
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class='credit-info'>
+        <div class='credit-info-content'>
+          <table class='half-input-table'>
+            <tr>
+              <td>Payement Method: </td>
+              <select matNativeControl required #selectedDropdown   (change)="onSelect($event)">
+                <option value={{defaultPaymentMethod}}>{{defaultPaymentMethod}}</option>
+                <option value={{paymentMethod}} *ngFor='let paymentMethod of PaymentMethods'>{{paymentMethod}}</option>
+              </select>
+            </tr>
+          </table>
+          <img src='https://cdn.pixabay.com/photo/2015/05/26/09/37/paypal-784404_960_720.png' height='80'
+            class='credit-card-image' id='credit-card-image' *ngIf='select == 0 || !hide' />
+
+            <div   *ngIf='select == 1'>
+             <h1 class='stripeTitle'>Stripe</h1>
+            </div>
+
+
+            <button class='pay-btn' (click)='pay(totalPrice)' *ngIf='select == 1'>Pay With Stripe</button>
+            <div>
+              <div  #paypal class='paypalDiv' [ngClass]='hide ? "hide" : ""'></div>
+            </div>
+
+
+
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,43 @@
+ {
+     "products": [{
+             "id": 0,
+             "name": "Chair",
+             "price": 12.00,
+             "description": "A very nice chair to sit on",
+             "src": "https://i.imgur.com/aWkpX3W.png"
+         }, {
+             "id": 1,
+             "name": "Table",
+             "price": 12.00,
+             "description": "A very nice Table to eat on",
+             "src": "https://www.potterybarn.com/pbimgs/ab/images/dp/wcm/201936/0735/reed-extending-dining-table-c.jpg"
+         }, {
+             "id": 2,
+             "name": "Pencil",
+             "price": 12.00,
+             "description": "A very nice Pencil to write with",
+             "src": "https://assets.ryman-static.co.uk/media/catalog/product//0/8/0801300014_1.jpg"
+         },
+         {
+             "id": 3,
+             "name": "Zencil",
+             "price": 2.00,
+             "description": "A very nice Zencil to Zencil with",
+             "src": "https://assets.ryman-static.co.uk/media/catalog/product//0/8/0801300014_1.jpg"
+         },
+         {
+             "id": 4,
+             "name": "Cancil",
+             "price": 5.00,
+             "description": "A very nice Cancil to Cancil with",
+             "src": "https://assets.ryman-static.co.uk/media/catalog/product//0/8/0801300014_1.jpg"
+         }, {
+             "id": 5,
+             "name": "Dencil",
+             "price": 32.00,
+             "description": "A very nice Dencil to Dencil with",
+             "src": "https://assets.ryman-static.co.uk/media/catalog/product//0/8/0801300014_1.jpg"
+         }
+
+     ]
+ }

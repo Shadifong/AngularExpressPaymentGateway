@@ -1,0 +1,25 @@
+<div>
+  <div class="row">
+    <div style="display:flex;justify-content:center">
+      <input class="form-control" class='input' type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
+        placeholder="&#xF002;  Start searching for a Product" style="font-family:Arial, FontAwesome">
+
+      <button style='position:relative' routerLink='/checkout'><span class='cartNumber'
+          *ngIf="productsInCartNumber">{{productsInCartNumber}}</span><span><i class="shopping-cart"></i></span>
+      </button>
+    </div>
+
+    <div style="display:flex;justify-content:center;" class='container'>
+      <div *ngFor='let product of products' class='item'>
+
+        <app-product product={{JSON.stringify(product)}}
+          *ngIf='product.name.toLowerCase().includes(searchText.toLowerCase())'>
+        </app-product>
+
+      </div>
+
+
+    </div>
+
+
+  </div>
