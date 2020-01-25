@@ -4,7 +4,7 @@ import { GetProductsService } from 'src/app/shared/services/get-products.service
 import { StorageServicesService } from 'src/app/shared/services/storage-services.service';
 import { CountryLocationService } from 'src/app/shared/services/country-location.service';
 import { SucessComponent } from '../../shared/dialogs/sucess/sucess.component';
-import { paymentMethodEnum } from '../../shared/enums/enum'
+import { paymentMethodEnum } from '../../shared/enums/enum';
 import { Router } from '@angular/router';
 import { PaymentServiceService } from 'src/app/shared/services/payment-service.service';
 declare var paypal;
@@ -22,8 +22,7 @@ export class CheckoutComponent implements OnInit {
   totalPrice;
   arrayOfObjects;
   orderStatus;
-  hide = true;
-  enablePaypal = false;
+  paypalToggle = true;
   enableStripe: any;
   select: any;
   productsArray: any = [];
@@ -50,14 +49,16 @@ export class CheckoutComponent implements OnInit {
         this.PaymentMethods = this.PaymentMethods.filter(
           o => o !== this.defaultPaymentMethod
         );
+        this.select = this.defaultPaymentMethod;
+
       }
     });
   }
   onSelect(text: any) {
-    this.select = text.srcElement.selectedIndex;
+    this.select = text.srcElement.value;
     this.checkPaymentMethod();
   }
-  pay(amount) {
+  payWithStripe(amount) {
     const handler = StripeCheckout.configure({
       key: 'pk_test_m5zsXaoNTqx0C3CUNq1fTZSR00teQwrsiO',
       locale: 'auto',
@@ -68,15 +69,15 @@ export class CheckoutComponent implements OnInit {
 
     handler.open({
       name: 'Stripe Payment',
-      description: `Purchase with a total of ${amount}`,
+      description: `Purchase with a total of ${amount}$`,
     });
 
   }
   checkPaymentMethod() {
-    if (this.defaultPaymentMethod === 'Stripe' || this.select == paymentMethodEnum.Stripe || this.totalPrice == 0) {
-      this.hide = true;
+    if (this.defaultPaymentMethod && this.defaultPaymentMethod === 'Stripe' || this.select === 'Stripe' || this.totalPrice === 0) {
+      this.paypalToggle = true;
     } else {
-      this.hide = false;
+      this.paypalToggle = false;
     }
   }
   getTotalPriceOfProducts() {
@@ -124,7 +125,6 @@ export class CheckoutComponent implements OnInit {
 
 
   ngOnInit() {
-    this.checkPaymentMethod();
     this.productsInCart = this.storageServicesService.getProductsFromStorage();
     this.getPaymentMethodAndDefaultPayemntOptions();
     this.getTotalPriceOfProducts();
