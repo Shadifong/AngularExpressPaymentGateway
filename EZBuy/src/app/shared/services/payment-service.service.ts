@@ -6,14 +6,15 @@ import { StorageServicesService } from './storage-services.service';
   providedIn: 'root'
 })
 export class PaymentServiceService {
-   productsList;
+  productsList;
   constructor(private httpClient: HttpClient, private storageServicesService: StorageServicesService) {
-    this.productsList =  this.storageServicesService.getProductsFromStorage();
+    this.productsList = this.storageServicesService.getProductsFromStorage();
   }
-  payForProducts(productsList) {
-    const products = JSON.stringify(productsList)
-    return  this.httpClient.post('http://localhost:7425/pay', {
-    products
-  });
+  payForProducts(orderID, payerID, total) {
+    return this.httpClient.post('http://localhost:7425/pay', {
+      orderID,
+      payerID,
+      total
+    });
   }
 }

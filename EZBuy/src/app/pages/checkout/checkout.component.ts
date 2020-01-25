@@ -6,6 +6,7 @@ import { CountryLocationService } from 'src/app/shared/services/country-location
 import { SucessComponent } from '../../shared/dialogs/sucess/sucess.component';
 import { paymentMethodEnum } from '../../shared/enums/enum'
 import { Router } from '@angular/router';
+import { PaymentServiceService } from 'src/app/shared/services/payment-service.service';
 declare var paypal;
 declare var StripeCheckout;
 @Component({
@@ -34,6 +35,7 @@ export class CheckoutComponent implements OnInit {
     private storageServicesService: StorageServicesService,
     private getProductsService: GetProductsService,
     private geoLocationService: CountryLocationService,
+    private paymentServiceService: PaymentServiceService,
     public dialog: MatDialog,
     public router: Router
   ) { }
@@ -103,12 +105,15 @@ export class CheckoutComponent implements OnInit {
           });
         },
         onApprove: async (data, actions) => {
-          const order = await actions.order.capture();
-          this.orderStatus = order.status;
-          this.dialog.open(SucessComponent, {
-            width: '250px',
-            data: { orderStatus: this.orderStatus }
-          });
+          this.paymentServiceService.payForProducts(data.orderID, data.payerID, this.totalPrice).subscribe((order: any) => {
+            this.orderStatus = order.body.status;
+            if (this.orderStatus) {
+              this.dialog.open(SucessComponent, {
+                width: '250px',
+                data: { orderStatus: this.orderStatus }
+              });
+            }
+          })
         },
         onError: err => {
           console.log(err);
