@@ -5,6 +5,9 @@ body {
   padding: 25px;
 }
 
+.currencyColor{
+  color: #85bb65;
+}
 .wrapper {
   width: 220px;
   height: 350px;
@@ -86,7 +89,6 @@ body {
           }
 
           &:hover i {
-            transform: translateY(5px);
             color: #00394B;
           }
         }
@@ -110,12 +112,13 @@ body {
           float: left;
           transition: transform 0.5s;
           border-right: solid thin rgba(255, 255, 255, 0.3);
-          height: 50%;
 
           i {
             font-size: 22px;
-            padding: 30px;
+            padding: 25px;
             color: white;
+            height: 40px;
+
           }
         }
 
@@ -130,16 +133,14 @@ body {
           &:hover {
             background: #9B2847;
           }
-
-          &:hover i {
-            transform: translateY(5px);
-          }
-
           i {
             transition: transform 0.5s;
             font-size: 30px;
-            padding: 30px;
+            padding-top: 25px;
+            padding-bottom: 25px;
+            padding-left: 19px;
             color: white;
+            height: 40px;
           }
         }
 

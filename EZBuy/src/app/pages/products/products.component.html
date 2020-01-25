@@ -1,6 +1,6 @@
 <div>
   <div class="row">
-    <div style="display:flex;justify-content:center">
+    <div class="center">
       <input class="form-control" class='input' type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
         placeholder="&#xF002;  Start searching for a Product" style="font-family:Arial, FontAwesome">
 
@@ -9,7 +9,7 @@
       </button>
     </div>
 
-    <div style="display:flex;justify-content:center;" class='container'>
+    <div sclass="center" class='container'>
       <div *ngFor='let product of products' class='item'>
 
         <app-product product={{JSON.stringify(product)}}
