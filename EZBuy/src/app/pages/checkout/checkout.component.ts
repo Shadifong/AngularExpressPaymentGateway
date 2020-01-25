@@ -129,7 +129,7 @@ export class CheckoutComponent implements OnInit {
     this.getPaymentMethodAndDefaultPayemntOptions();
     this.getTotalPriceOfProducts();
     this.createPaypalPaymentButton();
-    this.productsSub = this.getProductsService.getProductsFromArrayOfIds(this.productsInCart).subscribe(result => {
+    this.getProductsService.getProductsFromArrayOfIds(this.productsInCart).subscribe(result => {
       this.arrayOfObjects = result;
     });
   }
