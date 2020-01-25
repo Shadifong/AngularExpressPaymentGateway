@@ -5,6 +5,7 @@ import { StorageServicesService } from 'src/app/shared/services/storage-services
 import { CountryLocationService } from 'src/app/shared/services/country-location.service';
 import { SucessComponent } from '../../shared/dialogs/sucess/sucess.component';
 import { paymentMethodEnum } from '../../shared/enums/enum'
+import { Router } from '@angular/router';
 declare var paypal;
 declare var StripeCheckout;
 @Component({
@@ -33,7 +34,8 @@ export class CheckoutComponent implements OnInit {
     private storageServicesService: StorageServicesService,
     private getProductsService: GetProductsService,
     private geoLocationService: CountryLocationService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public router: Router
   ) { }
 
   getPaymentMethodAndDefaultPayemntOptions() {
@@ -89,16 +91,6 @@ export class CheckoutComponent implements OnInit {
     paypal
       .Buttons({
         createOrder: (data, actions) => {
-          // const purchaseUnits = this.arrayOfObjects.reduce((acc, currentValue) => {
-          //   acc.push({
-          //     description: currentValue.description,
-          //     amount: {
-          //       currency_code: 'USD',
-          //       value: this.totalPrice
-          //     }
-          //   });
-          //   return acc;
-          // }, []);
           return actions.order.create({
             purchase_units: [
               {
