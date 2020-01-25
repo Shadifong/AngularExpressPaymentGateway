@@ -69,7 +69,7 @@ export class CheckoutComponent implements OnInit {
 
   }
   checkPaymentMethod() {
-    if (this.defaultPaymentMethod === 'Stripe' || this.select == 1 || this.totalPrice == 0) {
+    if (this.defaultPaymentMethod === 'Stripe' || this.select == paymentMethodEnum.Stripe || this.totalPrice == 0) {
       this.hide = true;
     } else {
       this.hide = false;
@@ -89,18 +89,25 @@ export class CheckoutComponent implements OnInit {
     paypal
       .Buttons({
         createOrder: (data, actions) => {
-          let purchase_units = this.arrayOfObjects.reduce((acc, currentValue) => {
-            acc.push({
-              description: currentValue.description,
-              amount: {
-                currency_code: 'USD',
-                value: currentValue.price
-              }
-            });
-            return acc;
-          }, []);
+          // const purchaseUnits = this.arrayOfObjects.reduce((acc, currentValue) => {
+          //   acc.push({
+          //     description: currentValue.description,
+          //     amount: {
+          //       currency_code: 'USD',
+          //       value: this.totalPrice
+          //     }
+          //   });
+          //   return acc;
+          // }, []);
           return actions.order.create({
-            purchase_units
+            purchase_units: [
+              {
+                amount: {
+                  currency_code: 'USD',
+                  value: this.totalPrice
+                }
+              }
+            ]
           });
         },
         onApprove: async (data, actions) => {
