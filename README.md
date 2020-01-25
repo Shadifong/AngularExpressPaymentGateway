@@ -1,6 +1,7 @@
 # AngularExpressPaymentGateway
 ### About
- A small movie app developed with Angular, The app displays an updated list of popular movies, and gives additional movies information when             a movie on the movie table is clicked.
+An Angular/Express Project, on the Front-end Different Products are Display and the User Can Add them to A cart then
+Purchase them with Two Different Payment Methods ( Stripe/Paypal) depending on the User's Country
 
 ## Installion
 * Clone the rep with:
