@@ -62,7 +62,8 @@
           </div>
 
 
-          <button class='pay-btn' (click)='pay(totalPrice)' *ngIf='select == paymentMethodEnum.Stripe'>Pay
+          <button class='pay-btn' (click)='pay(totalPrice)' *ngIf='select == paymentMethodEnum.Stripe'
+            [disabled]='totalPrice === 0'>Pay
             With Stripe</button>
           <div>
             <div #paypal class='paypalDiv' [ngClass]='hide ? "hide" : ""'></div>
