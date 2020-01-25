@@ -14,10 +14,9 @@ declare var StripeCheckout;
   templateUrl: './checkout.component.html',
   styleUrls: ['./checkout.component.scss']
 })
-export class CheckoutComponent implements OnInit, OnDestroy {
+export class CheckoutComponent implements OnInit {
   @ViewChild('paypal', { static: true }) paypalElement: ElementRef;
   @ViewChild('selectedDropdown', { static: true }) selectedDropdown: ElementRef;
-  productsSub;
   productsInCart;
   userCountry;
   totalPrice;
@@ -133,9 +132,6 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     this.productsSub = this.getProductsService.getProductsFromArrayOfIds(this.productsInCart).subscribe(result => {
       this.arrayOfObjects = result;
     });
-  }
-  ngOnDestroy() {
-    this.productsSub.unsubscribe();
   }
 
 }
