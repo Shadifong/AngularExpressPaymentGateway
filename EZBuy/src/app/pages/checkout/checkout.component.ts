@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { GetProductsService } from 'src/app/shared/services/get-products.service';
 import { StorageServicesService } from 'src/app/shared/services/storage-services.service';
@@ -14,9 +14,10 @@ declare var StripeCheckout;
   templateUrl: './checkout.component.html',
   styleUrls: ['./checkout.component.scss']
 })
-export class CheckoutComponent implements OnInit {
+export class CheckoutComponent implements OnInit, OnDestroy {
   @ViewChild('paypal', { static: true }) paypalElement: ElementRef;
   @ViewChild('selectedDropdown', { static: true }) selectedDropdown: ElementRef;
+  productsSub;
   productsInCart;
   userCountry;
   totalPrice;
@@ -129,8 +130,12 @@ export class CheckoutComponent implements OnInit {
     this.getPaymentMethodAndDefaultPayemntOptions();
     this.getTotalPriceOfProducts();
     this.createPaypalPaymentButton();
-    this.getProductsService.getProductsFromArrayOfIds(this.productsInCart).subscribe(result => {
+    this.productsSub = this.getProductsService.getProductsFromArrayOfIds(this.productsInCart).subscribe(result => {
       this.arrayOfObjects = result;
     });
   }
+  ngOnDestroy() {
+    this.productsSub.unsubscribe();
+  }
+
 }
