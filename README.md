@@ -51,8 +51,8 @@ Purchase them with Two Different Payment Methods ( Stripe/Paypal) depending on t
 
 
 # Screenshots from the Project
-![](https://i.imgur.com/qMvDZ8H.png)
-![](https://i.imgur.com/1v4snbU.png)
+![](https://i.imgur.com/UOW9LKO.png)
+![](https://i.imgur.com/CerSJW6.png)
 ![](https://i.imgur.com/qIiqtrJ.png)
 ![](https://i.imgur.com/bNutZJv.png)
 ![](https://i.imgur.com/dIh9yLv.png)
