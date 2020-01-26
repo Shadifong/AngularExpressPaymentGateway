@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { PaymentServiceService } from 'src/app/shared/services/payment-service.service';
 declare var paypal;
 declare var StripeCheckout;
+declare var Stripe;
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
@@ -22,6 +23,7 @@ export class CheckoutComponent implements OnInit {
   totalPrice;
   arrayOfObjects;
   orderStatus;
+  form;
   paypalToggle = true;
   enableStripe: any;
   select: any;
@@ -58,20 +60,56 @@ export class CheckoutComponent implements OnInit {
     this.select = text.srcElement.value;
     this.checkPaymentMethod();
   }
-  payWithStripe(amount) {
-    const handler = StripeCheckout.configure({
-      key: 'pk_test_m5zsXaoNTqx0C3CUNq1fTZSR00teQwrsiO',
-      locale: 'auto',
-      token(token: any) {
-        console.log(token);
+  initStripe() {
+    const stripe = Stripe('pk_test_m5zsXaoNTqx0C3CUNq1fTZSR00teQwrsiO');
+    const elements = stripe.elements();
+    const card = elements.create('card', {
+      iconStyle: 'solid',
+      style: {
+        base: {
+          iconColor: '#c4f0ff',
+          color: '#fff',
+          fontWeight: 500,
+          fontFamily: 'Roboto, Open Sans, Segoe UI, sans-serif',
+          fontSize: '16px',
+          fontSmoothing: 'antialiased',
+
+          ':-webkit-autofill': {
+            color: '#fce883',
+          },
+          '::placeholder': {
+            color: '#87BBFD',
+          },
+        },
+        invalid: {
+          iconColor: '#FFC7EE',
+          color: '#FFC7EE',
+        },
+      },
+    });
+    this.form = document.getElementById('payment-form');
+    this.form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const { token, error } = await stripe.createToken(card);
+
+      if (error) {
+        const errorElement = document.getElementById('card-errors');
+        errorElement.textContent = error.message;
+      } else {
+        this.stripeTokenHandler(token);
       }
     });
 
-    handler.open({
-      name: 'Stripe Payment',
-      description: `Purchase with a total of ${amount}$`,
-    });
+    card.mount('#card-element');
 
+  }
+  stripeTokenHandler = (token) => {
+    this.paymentServiceService.payWithStripe(token, this.totalPrice).subscribe((res: any) => {
+      this.dialog.open(SucessComponent, {
+        width: '250px',
+        data: { orderStatus: res.charge.status }
+      });
+    })
   }
   checkPaymentMethod() {
     if (this.defaultPaymentMethod && this.defaultPaymentMethod === 'Stripe' || this.select === 'Stripe' || this.totalPrice === 0) {
@@ -125,6 +163,7 @@ export class CheckoutComponent implements OnInit {
 
 
   ngOnInit() {
+    this.initStripe();
     this.productsInCart = this.storageServicesService.getProductsFromStorage();
     this.getPaymentMethodAndDefaultPayemntOptions();
     this.getTotalPriceOfProducts();

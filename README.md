@@ -19,7 +19,15 @@ Purchase them with Two Different Payment Methods ( Stripe/Paypal) depending on t
 * Then you have to serve(run the application) with:
 ``` ng serve ```
 
+## Backend Installion
+* Then enter the Folders's directory using:
+```cd Server ```
+* Then you have to install the packages using npm(node package manager) with:
+``` npm install ```
+* then you have to add a .ENV file with all the Paypal API keys that are required
 
+* Then you have to server using:
+``` node server `
 
 ## Tools & Technologies used
 
@@ -54,5 +62,5 @@ Purchase them with Two Different Payment Methods ( Stripe/Paypal) depending on t
 ![](https://i.imgur.com/UOW9LKO.png)
 ![](https://i.imgur.com/CerSJW6.png)
 ![](https://i.imgur.com/qIiqtrJ.png)
-![](https://i.imgur.com/bNutZJv.png)
+![](https://i.imgur.com/7Qr2EUU.png)
 ![](https://i.imgur.com/dIh9yLv.png)

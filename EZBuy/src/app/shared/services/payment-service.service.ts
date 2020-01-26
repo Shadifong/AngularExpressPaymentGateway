@@ -17,4 +17,11 @@ export class PaymentServiceService {
       total
     });
   }
+  payWithStripe(fullToken, price) {
+    let token = fullToken.id;
+    return this.httpClient.post('http://localhost:7425/stripe', {
+      token,
+      price
+    });
+  }
 }

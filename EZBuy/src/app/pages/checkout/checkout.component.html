@@ -62,12 +62,23 @@
           </div>
 
 
-          <button class='pay-btn' (click)='payWithStripe(totalPrice)' *ngIf='select === "Stripe"'
-            [disabled]='totalPrice === 0'>Pay
-            With Stripe</button>
           <div>
             <div #paypal class='paypalDiv' [ngClass]='select === "Stripe" ? "hide" : ""'></div>
           </div>
+          <form action="localhost:7425/stripe" method="post" id="payment-form">
+            <div class="form-row" [ngClass]='select === "Paypal" ? "hide" : ""'>
+              <label for="card-element">
+                Credit or debit card
+              </label>
+              <div id="card-element">
+              </div>
+              <div id="card-errors" role="alert"></div>
+            </div>
+
+            <button class=' pay-btn' *ngIf='select === "Stripe"' [disabled]='totalPrice === 0'>Pay
+              With Stripe</button>
+          </form>
+
 
 
 
