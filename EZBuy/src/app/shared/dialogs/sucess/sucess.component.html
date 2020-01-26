@@ -1,7 +1,6 @@
 <h1 mat-dialog-title>Your Order Status Is</h1>
 <div mat-dialog-content>
-  <h2 class="sucess"> {{data.orderStatus}}</h2>
-
+  <h2 class="sucess" *ngIf='data.orderStatus'> {{data.orderStatus}}</h2>
 </div>
 <div mat-dialog-actions class='flex'>
   <button mat-button (click)='close()'>Close</button>
