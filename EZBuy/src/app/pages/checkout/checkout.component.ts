@@ -7,8 +7,11 @@ import { SucessComponent } from '../../shared/dialogs/sucess/sucess.component';
 import { paymentMethodEnum } from '../../shared/enums/enum';
 import { Router } from '@angular/router';
 import { PaymentServiceService } from 'src/app/shared/services/payment-service.service';
+import { AutoUnsubscribe } from 'src/app/shared/auto-unsubscribe.decorator';
 declare var paypal;
 declare var Stripe;
+@AutoUnsubscribe()
+
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
@@ -163,8 +166,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.locationSub.unsubscribe();
-    this.productsFromArrayOfIdsSub.unsubscribe();
+
   }
   ngOnInit() {
     this.initStripe();

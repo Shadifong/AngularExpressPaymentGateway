@@ -1,6 +1,9 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { GetProductsService } from '../../shared/services/get-products.service';
 import { StorageServicesService } from 'src/app/shared/services/storage-services.service';
+import { AutoUnsubscribe } from 'src/app/shared/auto-unsubscribe.decorator';
+
+@AutoUnsubscribe()
 
 @Component({
   selector: 'app-products',
@@ -32,5 +35,7 @@ export class ProductsComponent implements OnInit {
       });
       this.products = result.products;
     });
+  }
+  ngOnDestroy() {
   }
 }
