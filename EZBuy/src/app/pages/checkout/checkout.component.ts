@@ -8,14 +8,13 @@ import { paymentMethodEnum } from '../../shared/enums/enum';
 import { Router } from '@angular/router';
 import { PaymentServiceService } from 'src/app/shared/services/payment-service.service';
 declare var paypal;
-declare var StripeCheckout;
 declare var Stripe;
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
   styleUrls: ['./checkout.component.scss']
 })
-export class CheckoutComponent implements OnInit {
+export class CheckoutComponent implements OnInit, OnDestroy {
   @ViewChild('paypal', { static: true }) paypalElement: ElementRef;
   @ViewChild('selectedDropdown', { static: true }) selectedDropdown: ElementRef;
   productsInCart;
@@ -24,6 +23,7 @@ export class CheckoutComponent implements OnInit {
   arrayOfObjects;
   orderStatus;
   form;
+  locationSub;
   paypalToggle = true;
   enableStripe: any;
   select: any;
@@ -31,6 +31,7 @@ export class CheckoutComponent implements OnInit {
   PaymentMethods: any = ['Stripe', 'Paypal'];
   defaultPaymentMethod: string;
   paymentMethodEnum = paymentMethodEnum;
+  productsFromArrayOfIdsSub: any;
 
   constructor(
     private storageServicesService: StorageServicesService,
@@ -42,7 +43,7 @@ export class CheckoutComponent implements OnInit {
   ) { }
 
   getPaymentMethodAndDefaultPayemntOptions() {
-    this.geoLocationService.getUserCountry().subscribe((res: any) => {
+    this.locationSub = this.geoLocationService.getUserCountry().subscribe((res: any) => {
       if (res) {
         this.userCountry = res.country;
         this.defaultPaymentMethod = this.geoLocationService.defaultApiMethod(
@@ -161,14 +162,17 @@ export class CheckoutComponent implements OnInit {
       .render(this.paypalElement.nativeElement);
   }
 
-
+  ngOnDestroy(): void {
+    this.locationSub.unsubscribe();
+    this.productsFromArrayOfIdsSub.unsubscribe();
+  }
   ngOnInit() {
     this.initStripe();
     this.productsInCart = this.storageServicesService.getProductsFromStorage();
     this.getPaymentMethodAndDefaultPayemntOptions();
     this.getTotalPriceOfProducts();
     this.createPaypalPaymentButton();
-    this.getProductsService.getProductsFromArrayOfIds(this.productsInCart).subscribe(result => {
+    this.productsFromArrayOfIdsSub = this.getProductsService.getProductsFromArrayOfIds(this.productsInCart).subscribe(result => {
       this.arrayOfObjects = result;
     });
   }
