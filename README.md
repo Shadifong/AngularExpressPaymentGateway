@@ -24,7 +24,7 @@ Purchase them with Two Different Payment Methods ( Stripe/Paypal) depending on t
 * Then you have to install the packages using npm(node package manager) with:
 ``` npm install ```
 
-* Then you have to run both the Server and the Client using the Command:
+* Then you can run both the Server and the Client concurrently using one Command using :
 ``` npm start ```
 
 
