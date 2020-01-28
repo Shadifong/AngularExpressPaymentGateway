@@ -12,11 +12,8 @@ Purchase them with Two Different Payment Methods ( Stripe/Paypal) depending on t
 * Then you have to install the packages using npm(node package manager) with:
 ``` npm install ```
 
-* Then you have to server using:
-``` node server ```
-
 ## Client Installion
-* Then you have to open another Terminal to Run the Client(Angular) since the server is running on the first Terminal.
+* After installing the server, Simply install the Client 
 
 * If you don't have AngularCLI then install it globally with
 ```npm install -g @angular/cli ```
@@ -27,8 +24,8 @@ Purchase them with Two Different Payment Methods ( Stripe/Paypal) depending on t
 * Then you have to install the packages using npm(node package manager) with:
 ``` npm install ```
 
-* Then you have to serve(run the application) with:
-``` ng serve ```
+* Then you have to run both the Server and the Client using the Command:
+``` npm start ```
 
 
 ## Tools & Technologies used
