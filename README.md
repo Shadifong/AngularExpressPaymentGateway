@@ -7,6 +7,17 @@ Purchase them with Two Different Payment Methods ( Stripe/Paypal) depending on t
 * Clone the rep with:
 ``` git clone https://github.com/Shadifong/AngularExpressPaymentGateway```
 
+* Then enter the Folders's directory using:
+```cd Server ```
+* Then you have to install the packages using npm(node package manager) with:
+``` npm install ```
+
+* Then you have to server using:
+``` node server ```
+
+## Client Installion
+* Then you have to open another Terminal to Run the Client(Angular) since the server is running on the first Terminal.
+
 * If you don't have AngularCLI then install it globally with
 ```npm install -g @angular/cli ```
 
@@ -19,15 +30,6 @@ Purchase them with Two Different Payment Methods ( Stripe/Paypal) depending on t
 * Then you have to serve(run the application) with:
 ``` ng serve ```
 
-## Backend Installion
-* Then enter the Folders's directory using:
-```cd Server ```
-* Then you have to install the packages using npm(node package manager) with:
-``` npm install ```
-* then you have to add a .ENV file with all the Paypal API keys that are required
-
-* Then you have to server using:
-``` node server `
 
 ## Tools & Technologies used
 
